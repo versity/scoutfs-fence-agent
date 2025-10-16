@@ -1,0 +1,44 @@
+%define pkg_version @@VERSION@@
+%define pkg_git_hash @@GITHASH@@
+
+%{!?_release: %global _release 0.git%{pkg_git_hash}}
+
+Name:           scoutfs-fence-agent
+Summary:        scoutfs user space fencing agent
+Version:        %{pkg_version}
+Release:        %{_release}%{?dist}
+License:        GPLv2
+Group:          System Environment/Base
+URL:            http://scoutfs.org/
+
+Requires:	openssh-client
+Requires:	ipmitool
+
+Source:		scoutfs-fence-agent-%{pkg_version}.tar
+
+# Disable the building of the debug package(s).
+%define debug_package %{nil}
+
+%description
+The scoutfs fence agent dispatches fence requests from the scoutfs
+server/filesystem and severs nodes that are no longer within operational
+limits. This is done to assure data remains intact and consistent.
+
+%prep
+%autosetup
+
+%build
+%make_build
+
+%install
+%make_install
+
+%files
+%defattr(-,root,root,-)
+%config(noreplace) %{_sysconfdir}/scoutfs/scoutfs-fenced.conf
+%attr(0755,root,root) %{_libexecdir}/scoutfs-fenced/run/scoutfs-fence-agent
+%doc %{_docdir}/scoutfs-fence-agent/*
+
+%clean
+rm -rf %{buildroot}
+

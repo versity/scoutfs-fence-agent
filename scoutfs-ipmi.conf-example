@@ -1,0 +1,61 @@
+#
+# Example /etc/scoutfs-fenced/scoutfs-ipmi.conf file
+#
+# Copy this file to /etc/scoutfs-fenced/scoutfs-ipmi.conf, and uncomment
+# and edit these as needed.
+#
+
+
+#
+# SSH configuration
+#
+# the fence agent requires SSH access to the quorum nodes in order to recover
+# from a node restart. This access must provide root level access on the remote
+# node in order to access resources that are not accessible without it.
+#
+
+## SSH=/bin/ssh
+## SSH_USER=root
+
+# It is generally a good idea to put the private key in a non-default location
+# so that it can't inadvertently be used for casual remote SSH access from one
+# node to another. This should point to the full path of the `id_rsa` file (without
+# `.pub`). Add the contents of the `id_rsa.pub` file to the remote machines and
+# into the contents of the `$SSH_USER/.ssh/authorized_keys` file. For clusters with
+# 3 or more nodes, there should be multiple entries.
+
+## SSH_IDENTS=
+
+
+#
+# IPMI configuration
+#
+
+## IPMITOOL=/bin/ipmitool
+## IPMI_RETRIES=1
+## IPMI_OPTS=""
+## IPMI_USER=admin
+## IPMI_PASS=password
+# or, using a base64 version of the same:
+## IPMI_PASS=cGFzc3dvcmQK
+
+
+#
+# powerman configuration
+#
+
+## POWERMAN=/bin/pm
+## POWERMAN_PORT=10101
+
+
+#
+# vsphere configuration
+#
+
+## VSPHERE_USER=""
+#
+# The vsphere password can be plain-text or a base64 encoded
+# string, e.g. "cGFzc3dvcmQK" or "password".
+#
+## VSPHERE_PASS="cGFzc3dvcmQK"
+

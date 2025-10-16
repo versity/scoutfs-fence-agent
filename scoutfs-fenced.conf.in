@@ -1,0 +1,1 @@
+SCOUTFS_FENCED_RUN=@@PREFIX@@/@@LIBEXEC@@/scoutfs-fenced/run/scoutfs-fence-agent

@@ -1,0 +1,48 @@
+
+#
+# Example scoutfs-ipmi-hosts.conf file
+#
+# Install this file to `/etc/scoutfs/` and edit as needed. As a general
+# rule of thumb: all nodes should be listed, and this file should look
+# exactly the same on all scoutfs quorum nodes.
+#
+
+# ipmitool example:
+#
+# Format:
+# <quorum IP>  <"ipmitool">  <ipmi server[:port]>
+#
+# ALl 3 fields are required. The port number to the ipmi/BMC
+# may be omitted, the default port number is 624. If the BMC
+# is on a different subnet than the quorum IPs, it may be different
+# as is shown in the example below
+## 10.0.2.130     ipmitool     10.0.1.130
+## 10.0.2.131     ipmitool     10.0.1.131:624
+## 10.0.2.132     ipmitool     10.0.1.132:625
+
+
+# powerman example:
+#
+# Format:
+# <quorum IP>  <"powerman">   <pm_server[,pm_server...]:nodename>
+#
+# All 3 fields are required. Multiple powerman servers ("pm_server")
+# may be listed and comma separated, all will be tried when needed. They
+# can be either IP or hostname.
+## 10.0.2.130     powerman     pmserv1,10.0.1.55:scfs-1
+## 10.0.2.131     powerman     pmserv1,10.0.1.55:scfs-2
+## 10.0.2.132     powerman     pmserv1,10.0.1.55:scfs-3
+
+
+# vsphere example:
+#
+# Format:
+# <quorum IP>  <"vsphere">  <vs_server:nodename>
+#
+# All 3 fields are required. The vsphere server name may be an IP
+# address. The field after the colon (:) is the domain name or 
+# node name.
+## 10.0.2.200   vsphere   vsphere-admin:vm50001
+## 10.0.2.201   vsphere   vsphere-admin:vm50002
+## 10.0.2.202   vsphere   vsphere-admin:vm50003
+
